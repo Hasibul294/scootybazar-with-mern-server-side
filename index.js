@@ -27,14 +27,21 @@ async function run() {
     const usersCollection = database.collection("users");
     const reviewCollection = database.collection("review");
 
-    //Get API
+    //Get Product API
     app.get("/products", async (req, res) => {
       const cursor = productCollection.find({});
       const products = await cursor.toArray();
       res.send(products);
     });
 
-    //Dynamic API
+    //Get Review API
+    app.get("/reviews", async (req, res) => {
+      const cursor = reviewCollection.find({});
+      const reviews = await cursor.toArray();
+      res.send(reviews);
+    });
+
+    //Dynamic Product API
     app.get("/product/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
